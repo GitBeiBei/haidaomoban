@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>查看，修改，删除</title>
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <style>
+    table{
+      width:500px;
+      border:1px solid blue;
+      border-collapse: collapse;
+    }
+    table th{
+      border:1px solid blue;
+      height:30px;
+    }
+    table td{
+      border:1px solid blue;
+      text-align:center;
+      height:30px;
+    }
+    table td a {
+      color:red;
+    }
+    div.proDiv{
+      width:500px;
+      position: absolute;
+      left:50%;
+      margin-left:-250px;
+      padding:10px;
+      border:1px solid red;
+      top:100px;
+      background: #fff;
+      display: none;
+      z-index: 3
+    }
+    div.proDiv p{
+      border-bottom:1px solid red;
+    }
+    div.proDiv a.close{
+      color:red;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <tr>
+      <th>姓名</th>
+      <th>年龄</th>
+      <th>工作</th>
+      <th>工资</th>
+      <th>操作</th>
+    </tr>
+    <tr>
+      <td>张三</td>
+      <td>22</td>
+      <td>项目经理</td>
+      <td>12000</td>
+      <td>
+        <a href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="view">查看</a>
+        <a href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" >修改</a>
+        <a href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="del">删除</a>
+      </td>
+    </tr>
+    <tr>
+      <td>李四</td>
+      <td>24</td>
+      <td>前端工程师</td>
+      <td>10000</td>
+      <td>
+        <a href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="view">查看</a>
+        <a href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" >修改</a>
+        <a href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="del">删除</a>
+      </td>
+    </tr>
+    <tr>
+      <td>王五</td>
+      <td>21</td>
+      <td>java工程师</td>
+      <td>12000</td>
+      <td>
+        <a href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="view">查看</a>
+        <a href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" >修改</a>
+        <a href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="del">删除</a>
+      </td>
+    </tr>
+  </table>
+  <div class="proDiv">
+    <p><strong>姓名：</strong><span></span></p>
+    <p><strong>年龄：</strong><span></span></p>
+    <p><strong>工作：</strong><span></span></p>
+    <p><strong>工资：</strong><span></span></p>
+    <a class="close" href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" >关闭</a>
+  </div>
+</body>
+<script src="js/jquery-2.1.0.js"></script>
+<script>
+  //查看操作
+  $('a.view').click(function(){
+    //获取文档的宽和高
+    var maskWidth = $(document).width();
+    var maskHeight = $(document).height();
+    //遮罩层初始化
+    $('<div class="mask"></div>').appendTo($('body'));
+    $('div.mask').css({
+      'position':'absolute',
+      'top':0,
+      'left':0,
+      'background':'black',
+      'opacity':0.5,
+      'width':maskWidth,
+      'height':maskHeight,
+      'z-index':2
+    });
+    var data = [];//保存数据的数组
+    //将一行的数据添加到数据中
+    $(this).parent().siblings().each(function(){
+      data.push($(this).text())
+    });
+    //将内容显示到弹出层中
+    $('div.proDiv').children().each(function(i){
+      $(this).children('span').text(data[i]);
+    });
+    $('div.proDiv').show();//显示弹出层
+    //关闭操作
+    $('a.close').click(function(){
+      $(this).parent().hide();
+      $('div.mask').remove();
+    });
+  });
+  //删除操作
+  $('a.del').click(function(){
+    $(this).parents('tr').remove();
+  });
+</script>
+</html>

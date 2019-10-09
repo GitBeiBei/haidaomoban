@@ -1,0 +1,52 @@
+.shop-list ul{
+    display: flex;
+    flex-direction: row;
+    padding-top: 261px;
+}
+.shopheadr-list ul li{
+    padding-left: 20px;
+}
+/* <!--Grid Fullwidth 内容 --> */
+.shop-container{
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.shop-box {
+    padding: 34px 0 30px;
+}
+.shop-list{
+    background: #ffffff;
+    margin: 0;
+}
+.shop-list li{
+    float: left;
+}
+.clirf:after{
+    display: block;
+    content: "";
+    overflow: hidden;
+    clear: both;
+    height: 0;
+}
+.shop-hint-box .shop-h3{
+    font-size: 28px;
+    font-family: inherit;
+    letter-spacing: 0;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 40px;
+    text-transform: capitalize;
+}
+.shop-erheng{
+    height: 8px;
+}
+.shop-shop-erheng-two{
+    display: none;
+}
+@media (min-width: 1200px){
+    .shop-container {
+        width: 1200px;
+    }
+}
